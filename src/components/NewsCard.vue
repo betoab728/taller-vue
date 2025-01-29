@@ -1,7 +1,7 @@
 <template>
     <article class="post-card">
         <div class="post-image">
-            <img :src="'https://picsum.photos/seed/${post.id}/400/300'" :alt="post.title">
+            <img :src="`https://picsum.photos/seed/${post.id}/400/300`" :alt="post.title">
             <span class="category-tag">{{ post.category }}</span>
         </div>
         <div class="post-content">
