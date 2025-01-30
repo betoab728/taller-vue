@@ -2,8 +2,10 @@
     <div class="home">
         <section class="hero">
             <h1>Últimas Noticias</h1>
-
+            <SearchBar v-model="searchQuery" />
         </section>
+
+        <CategoryFilter :categories="categories" v-model="selectedCategory" />
 
         <div class="posts-grid" v-if="filteredPosts.length">
             <NewsCard v-for="post in filteredPosts" :key="post.id" :post="post" />
@@ -20,6 +22,8 @@
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { FileSearch } from 'lucide-vue-next'
+import SearchBar from '@/components/SearchBar.vue'
+import CategoryFilter from '@/components/CategoryFilter.vue'
 import NewsCard from '@/components/NewsCard.vue'
 
 const store = useStore()
@@ -42,6 +46,14 @@ const filteredPosts = computed(() => {
 
     if (selectedCategory.value !== 'Todos') {
         filtered = filtered.filter(post => post.category === selectedCategory.value)
+    }
+
+    if (searchQuery.value) {
+        const query = searchQuery.value.toLowerCase()
+        filtered = filtered.filter(post =>
+            post.title.toLowerCase().includes(query) ||
+            post.body.toLowerCase().includes(query)
+        )
     }
 
     return filtered
