@@ -35,7 +35,7 @@ const store = createStore({
     },
     async fetchPost({ commit }, id) {
       try {
-        const response = await axios.get('/posts/${id}')
+        const response = await axios.get(`/posts/${id}`)
         commit('setCurrentPost', response.data)
       } catch (error) {
         console.error('Error fetching post:', error)
@@ -49,6 +49,22 @@ const routes = [
   {
     path: '/',
     component: () => import('./views/HomeView.vue')
+  },
+  {
+    path: '/post/:id',
+    component: () => import('./views/PostView.vue')
+  },
+  {
+    path: '/trending',
+    component: () => import('./views/TrendingView.vue')
+  },
+  {
+    path: '/categories',
+    component: () => import('./views/CategoriesView.vue')
+  },
+  {
+    path: '/categories/:category',
+    component: () => import('./views/CategoryDetailView.vue')
   }
 ]
 

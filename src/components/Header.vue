@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-  <h2>Header</h2>
+ 
     <nav class="nav-container">
       <router-link to="/" class="logo">
         <Newspaper class="logo-icon" />
